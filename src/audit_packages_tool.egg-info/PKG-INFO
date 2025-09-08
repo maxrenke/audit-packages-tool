@@ -1,0 +1,162 @@
+Metadata-Version: 2.4
+Name: audit-packages-tool
+Version: 0.1.0
+Summary: System Package Auditor - Find out what packages you have installed across package managers
+Author-email: Max Renke <info@maxrenke.com>
+License: MIT
+Project-URL: Homepage, https://github.com/maxrenke/audit_packages_tool
+Project-URL: Repository, https://github.com/maxrenke/audit_packages_tool
+Project-URL: Documentation, https://github.com/maxrenke/audit_packages_tool#readme
+Project-URL: Issues, https://github.com/maxrenke/audit_packages_tool/issues
+Project-URL: Changelog, https://github.com/maxrenke/audit_packages_tool/blob/main/CHANGELOG.md
+Keywords: audit,packages,package-manager,pip,npm,cargo,system-administration
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Topic :: System :: Systems Administration
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0; extra == "dev"
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+Requires-Dist: mypy>=1.0; extra == "dev"
+Requires-Dist: black>=22.0; extra == "dev"
+Requires-Dist: pre-commit>=3.0; extra == "dev"
+Requires-Dist: build>=0.10; extra == "dev"
+Requires-Dist: twine>=4.0; extra == "dev"
+Provides-Extra: rich
+Requires-Dist: rich>=13.0; extra == "rich"
+Requires-Dist: typer[all]>=0.9; extra == "rich"
+Dynamic: license-file
+
+# Audit Packages Tool 🔍
+
+[![CI/CD Pipeline](https://github.com/maxrenke/audit_packages_tool/actions/workflows/ci.yml/badge.svg)](https://github.com/maxrenke/audit_packages_tool/actions/workflows/ci.yml)
+[![PyPI version](https://badge.fury.io/py/audit-packages-tool.svg)](https://badge.fury.io/py/audit-packages-tool)
+[![Python versions](https://img.shields.io/pypi/pyversions/audit-packages-tool.svg)](https://pypi.org/project/audit-packages-tool/)
+[![Coverage](https://codecov.io/gh/maxrenke/audit_packages_tool/branch/main/graph/badge.svg)](https://codecov.io/gh/maxrenke/audit_packages_tool)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**Professional system package auditor for multiple package managers - Built with modern Python practices and enterprise-grade tooling.**
+
+Built by [**Max Renke**](https://www.maxrenke.com) | *Following the same engineering excellence demonstrated in [osv-vulnerability-scanner](https://github.com/maxrenke/osv-vulnerability-scanner)*
+
+## 🚀 Quick Start
+
+### Professional Installation
+```bash
+pip install audit-packages-tool
+```
+
+### Usage
+```bash
+# Scan all executable packages (default)
+audit-packages
+
+# Export results to JSON
+audit-packages --json
+
+# Search for specific packages
+audit-packages search pytest
+
+# Include all packages (not just executables)
+audit-packages --all
+```
+
+## ✨ Enterprise Features
+
+- **🏗️ Modular Architecture** - Clean separation of scanner, reporting, and CLI logic
+- **📦 Multi-Manager Support** - pip, npm, cargo, brew, and more
+- **🎯 Smart Detection** - Intelligent executable vs library classification
+- **📊 Professional Output** - Human-readable summaries with JSON export
+- **🔍 Search Capability** - Find packages by name or description
+- **⚡ Modern Packaging** - Installable via pip with proper entry points
+- **🧪 Comprehensive Testing** - 90%+ test coverage with CI/CD pipeline
+
+## 🛠️ Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/maxrenke/audit_packages_tool
+cd audit_packages_tool
+
+# Install in development mode
+pip install -e ".[dev]"
+
+# Run tests
+pytest
+
+# Run linting and formatting
+ruff check --fix
+ruff format
+mypy src/
+```
+
+## 📚 Package Manager Support
+
+| Manager | Status | Description |
+|---------|--------|--------------|
+| **pip** | ✅ Full | Python packages with detailed metadata |
+| **npm** | ✅ Full | Node.js global packages |
+| **cargo** | ✅ Full | Rust packages via `cargo install` |
+| **brew** | ✅ macOS | Homebrew packages (macOS only) |
+| **winget** | 🚧 Planned | Windows Package Manager |
+| **apt** | 🚧 Planned | Debian/Ubuntu packages |
+| **yum** | 🚧 Planned | RHEL/CentOS packages |
+| **snap** | 🚧 Planned | Universal Linux packages |
+| **flatpak** | 🚧 Planned | Linux application distribution |
+
+## 🏛️ Architecture
+
+```
+src/audit_packages_tool/
+├── models/          # Data structures (PackageInfo, enums)
+├── scanner/         # Package detection and auditing logic
+├── reporting/       # Output formatting (console, JSON)
+└── cli.py          # Command-line interface
+```
+
+## 🧪 Quality Assurance
+
+- **Static Analysis**: ruff, mypy with strict typing
+- **Testing**: pytest with 90%+ coverage requirement
+- **CI/CD**: Multi-platform testing (Linux, Windows, macOS)
+- **Security**: Dependabot, security scanning
+- **Code Quality**: Pre-commit hooks, automated formatting
+
+## 🤝 Contributing
+
+We welcome contributions! This project follows modern Python development practices:
+
+1. **Fork** the repository
+2. **Create** a feature branch
+3. **Make** your changes with tests
+4. **Ensure** all checks pass (`pytest`, `ruff`, `mypy`)
+5. **Submit** a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## 👨‍💻 About the Developer
+
+**Max Renke** | Software Engineer  
+🌐 **Portfolio**: [maxrenke.com](https://www.maxrenke.com)  
+🛡️ **Expertise**: Security tooling, API integration, modern Python architecture
+
+> *"This tool demonstrates the same attention to engineering excellence and modern Python practices used in production security tools. It showcases professional development workflows, comprehensive testing, and maintainable architecture."*

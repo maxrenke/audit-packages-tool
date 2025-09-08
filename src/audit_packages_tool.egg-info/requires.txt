@@ -1,0 +1,14 @@
+
+[dev]
+pytest>=7.0
+pytest-cov>=4.0
+ruff>=0.1.0
+mypy>=1.0
+black>=22.0
+pre-commit>=3.0
+build>=0.10
+twine>=4.0
+
+[rich]
+rich>=13.0
+typer[all]>=0.9
