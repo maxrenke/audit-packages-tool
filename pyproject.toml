@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "audit-packages-tool"
-version = "1.0.0"
+version = "1.0.1"
 description = "System Package Auditor - Find out what packages you have installed across package managers"
 readme = "README.md"
 license = {text = "MIT"}
