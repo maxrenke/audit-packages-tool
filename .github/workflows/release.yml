@@ -14,6 +14,11 @@ jobs:
     permissions:
       id-token: write
       contents: write
+    env:
+      # PyPI publishing is opt-in: with no PYPI_API_TOKEN the publish action
+      # falls back to OIDC trusted publishing, which is not configured for this
+      # project either, so it failed every release. Gate the step instead.
+      HAS_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN != '' }}
 
     steps:
     - name: Checkout repository
@@ -47,15 +52,23 @@ jobs:
       run: |
         python -m build
 
-    - name: Publish to PyPI
-      if: steps.release.outputs.released == 'true'
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        password: ${{ secrets.PYPI_API_TOKEN }}
-
+    # GitHub Release first: it needs no external credentials, so a missing or
+    # misconfigured PyPI setup no longer skips it.
     - name: Publish GitHub Release
       if: steps.release.outputs.released == 'true'
       uses: python-semantic-release/upload-to-gh-release@main
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         path: dist/*
+
+    - name: Publish to PyPI
+      if: steps.release.outputs.released == 'true' && env.HAS_PYPI_TOKEN == 'true'
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
+
+    - name: Note skipped PyPI publish
+      if: steps.release.outputs.released == 'true' && env.HAS_PYPI_TOKEN != 'true'
+      run: |
+        echo "::notice::PyPI publish skipped - no PYPI_API_TOKEN secret is set." \
+             "Add one (or configure a PyPI trusted publisher) to enable it."
