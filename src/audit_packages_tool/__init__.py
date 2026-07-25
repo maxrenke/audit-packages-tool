@@ -4,7 +4,7 @@ audit_packages_tool - System Package Auditor
 A tool for auditing and listing installed packages from various package managers.
 """
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 __author__ = "Max Renke"
 __email__ = "info@maxrenke.com"
 
