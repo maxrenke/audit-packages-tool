@@ -58,10 +58,12 @@ jobs:
         name: codecov-umbrella
 
     - name: Verify package structure
+      # Plain ASCII only: the Windows runner's default console encoding is
+      # cp1252 and cannot encode emoji, which raised UnicodeEncodeError.
       run: |
-        python -c "import audit_packages_tool; print('✅ Package import successful')"
-        python -c "from audit_packages_tool.scanner import PackageAuditor; print('✅ PackageAuditor import successful')"
-        python -c "from audit_packages_tool.models import PackageInfo; print('✅ PackageInfo import successful')"
+        python -c "import audit_packages_tool; print('OK: package import successful')"
+        python -c "from audit_packages_tool.scanner import PackageAuditor; print('OK: PackageAuditor import successful')"
+        python -c "from audit_packages_tool.models import PackageInfo; print('OK: PackageInfo import successful')"
 
   security:
     name: Security & Dependency Audit
