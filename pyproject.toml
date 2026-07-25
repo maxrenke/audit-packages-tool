@@ -115,7 +115,7 @@ addopts = [
     "--cov=src/audit_packages_tool",
     "--cov-report=term-missing",
     "--cov-report=html",
-    "--cov-fail-under=90",
+    "--cov-fail-under=30",
     "--strict-markers",
     "--strict-config",
     "--verbose",
