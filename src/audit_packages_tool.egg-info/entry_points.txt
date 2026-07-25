@@ -1,2 +1,0 @@
-[console_scripts]
-audit-packages = audit_packages_tool.cli:main

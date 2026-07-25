@@ -16,3 +16,6 @@ env/
 
 # Other
 *.json
+
+dist/
+*.egg-info/
