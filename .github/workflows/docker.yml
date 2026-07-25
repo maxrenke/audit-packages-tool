@@ -50,7 +50,16 @@ jobs:
           type=semver,pattern={{major}}
           type=sha
 
+    # Booting buildkit pulls moby/buildkit from Docker Hub, which intermittently
+    # times out ("context deadline exceeded") and fails the whole run. Retry once
+    # before giving up.
     - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v3
+      continue-on-error: true
+
+    - name: Set up Docker Buildx (retry)
+      if: steps.buildx.outcome == 'failure'
       uses: docker/setup-buildx-action@v3
 
     - name: Build and push Docker image
@@ -64,6 +73,10 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
+    # Only meaningful when the image was actually pushed. On pull_request the
+    # build runs with push: false and a multi-platform build cannot be loaded
+    # into the local docker daemon, so there would be no image to run.
     - name: Test Docker image
+      if: github.event_name != 'pull_request'
       run: |
         docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }} --help
